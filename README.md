@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Refactor Streamlit Dashboard Sederhana
 
 Versi ini mempertahankan gaya dashboard lama, tapi logic-nya diubah supaya:
@@ -66,3 +67,7 @@ Untuk deploy ke Streamlit Cloud, lihat [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md
 ## Catatan
 
 Kalau kamu belum sempat ekspor `slang_dict.json`, app tetap bisa jalan, tapi bagian normalisasi slang jadi tidak maksimal.
+=======
+# dashboard-sentiment-analysis
+Dashboard Analisis Sentimen Terhadap Perencanaan Pemilu Elektronik di Indonesia Menggunakan Pendekatan Soft Voting Ensemble
+>>>>>>> 70063095305e64a73812fc5ec6f903dd47c18469
