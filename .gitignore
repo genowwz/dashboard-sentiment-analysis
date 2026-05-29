@@ -1,0 +1,42 @@
+# Virtual Environment
+venv/
+env/
+ENV/
+*.pyc
+__pycache__/
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Streamlit
+.streamlit/secrets.toml
+.streamlit/cache/
+
+# Uploads dan temporary files
+uploads/
+*.csv
+*.pkl
+*.joblib
+
+# Environment variables
+.env
+.env.local
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Pytest
+.pytest_cache/
+htmlcov/
+
+# Logs
+*.log
