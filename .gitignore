@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Virtual Environment
 venv/
 env/
@@ -24,7 +23,6 @@ build/
 # Uploads dan temporary files
 uploads/
 *.csv
-*.pkl
 *.joblib
 
 # Environment variables
@@ -41,13 +39,10 @@ htmlcov/
 
 # Logs
 *.log
-=======
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[codz]
-*$py.class
 
-# C extensions
+# Model files - EXCLUDE by default, but INCLUDE artifacts/new_artifacts
+*.pkl
+!artifacts/**/*.pkl
 *.so
 
 # Distribution / packaging
