@@ -721,6 +721,8 @@ def shorten_model_name(name: str) -> str:
 
         "Logistic Regression": "Log. Regression",
         "Logistic Regression Tuning": "Log. Regression Tuning",
+
+        "Random Forest": "Random Forest",
         "Random Forest Tuning": "RF Tuning",
     }
     return replacements.get(name, name)
@@ -1436,7 +1438,7 @@ if st.session_state.admin:
                             "val_std": 0.0189,
                             "gap": 0.0475
                         }
-                    },
+                    }
                 }
                 
                 # =====================================================
