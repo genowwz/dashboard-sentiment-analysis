@@ -1305,8 +1305,8 @@ if st.session_state.admin:
                 ]
                 
                 evoting_confusions = {
-                    "Soft Voting Baseline Tanpa SMOTE": [[419, 88], [72, 217]],
-                    "Soft Voting Baseline + SMOTE": [[472, 35], [145, 144]],
+                    "Soft Voting Baseline + SMOTE": [[419, 88], [72, 217]],
+                    "Soft Voting Baseline Tanpa SMOTE": [[472, 35], [145, 144]],
                     "Soft Voting Optimasi Awal + SMOTE": [[426, 81], [72, 217]],
                     "Soft Voting Optimasi Awal Tanpa SMOTE": [[456, 51], [113, 176]],
                     "Soft Voting Tuning + SMOTE": [[416, 91], [76, 213]],
