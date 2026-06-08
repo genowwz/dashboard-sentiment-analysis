@@ -1422,7 +1422,7 @@ if st.session_state.admin:
                             "gap": 0.0759
                         }
                     },
-                    "Logistic Regression Tuning": {
+                    "Random Forest Tuning": {
                         "folds": [
                             {"Training Accuracy": 0.809, "Validation Accuracy": 0.750},
                             {"Training Accuracy": 0.815, "Validation Accuracy": 0.785},
