@@ -677,7 +677,7 @@ def show_result_visuals(df_res: pd.DataFrame):
 
         st.markdown(f"""
         <div style='background: #f5f5f5; border-left: 4px solid #667eea; padding: 12px; border-radius: 6px;'>
-            <strong>Best Model</strong><br/>
+            <strong>Model Akurasi Terbaik</strong><br/>
             {best_model}<br/>
             <span style='font-size: 0.85rem; color: #6b7280;'>
                 Akurasi {best_accuracy:.4f} • F1-score {best_f1:.4f}
