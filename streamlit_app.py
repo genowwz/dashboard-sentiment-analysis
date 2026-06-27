@@ -1276,10 +1276,10 @@ if st.session_state.admin:
                     },
                     {
                         "Model": "Soft Voting Tuning + SMOTE",
-                        "Accuracy": 0.7902,
-                        "Precision": 0.7929,
-                        "Recall": 0.7902,
-                        "F1": 0.7913,
+                        "Accuracy": 0.7889,
+                        "Precision": 0.7915,
+                        "Recall": 0.7889,
+                        "F1": 0.7900,
                     },
                     {
                         "Model": "Soft Voting Tuning Tanpa SMOTE",
@@ -1309,7 +1309,7 @@ if st.session_state.admin:
                     "Soft Voting Baseline Tanpa SMOTE": [[472, 35], [145, 144]],
                     "Soft Voting Optimasi Awal + SMOTE": [[426, 81], [72, 217]],
                     "Soft Voting Optimasi Awal Tanpa SMOTE": [[456, 51], [113, 176]],
-                    "Soft Voting Tuning + SMOTE": [[416, 91], [76, 213]],
+                    "Soft Voting Tuning + SMOTE": [[416, 91], [77, 212]],
                     "Soft Voting Tuning Tanpa SMOTE": [[467, 40], [119, 170]],
                     "Logistic Regression Tuning": [[456, 51], [111, 178]],
                     "Random Forest Tuning": [[482, 25], [162, 127]],
@@ -1381,17 +1381,17 @@ if st.session_state.admin:
                     },
                     "Soft Voting Tuning + SMOTE": {
                         "folds": [
-                            {"Training Accuracy": 0.866, "Validation Accuracy": 0.749},
-                            {"Training Accuracy": 0.860, "Validation Accuracy": 0.779},
-                            {"Training Accuracy": 0.855, "Validation Accuracy": 0.783},
-                            {"Training Accuracy": 0.858, "Validation Accuracy": 0.794},
-                            {"Training Accuracy": 0.859, "Validation Accuracy": 0.800},
+                            {"Training Accuracy": 0.866, "Validation Accuracy": 0.752},
+                            {"Training Accuracy": 0.859, "Validation Accuracy": 0.780},
+                            {"Training Accuracy": 0.855, "Validation Accuracy": 0.788},
+                            {"Training Accuracy": 0.857, "Validation Accuracy": 0.791},
+                            {"Training Accuracy": 0.858, "Validation Accuracy": 0.800},
                         ],
                         "stats": {
-                            "avg_train": 0.8596,
-                            "avg_val": 0.7810,
-                            "val_std": 0.0178,
-                            "gap": 0.0786
+                            "avg_train": 0.8589,
+                            "avg_val": 0.7823,
+                            "val_std": 0.0165,
+                            "gap": 0.0766
                         }
                     },
                     "Soft Voting Tuning Tanpa SMOTE": {
