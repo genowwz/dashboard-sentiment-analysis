@@ -2,6 +2,8 @@
 # IMPORT
 # =========================
 import json
+import re
+from collections import Counter
 from datetime import datetime
 from pathlib import Path
 
@@ -194,11 +196,9 @@ def get_lda_topics(lda_model, feature_names, n_words=10):
     for topic_idx, topic in enumerate(lda_model.components_):
         top_indices = topic.argsort()[-n_words:][::-1]
         top_words = [feature_names[i] for i in top_indices]
-        top_weights = [topic[i] for i in top_indices]
         topics.append({
             "topic_id": topic_idx,
-            "words": top_words,
-            "weights": top_weights
+            "words": top_words
         })
     
     return topics
@@ -329,37 +329,57 @@ def extract_words_by_sentiment(processed_texts, predictions):
     
     return top_words_pos, top_words_neg
 
+def _tokenize_for_wordcloud(text):
+    """Tokenisasi sederhana untuk menghasilkan unigram dan bigram dari teks."""
+    if not isinstance(text, str):
+        text = str(text)
+
+    text = text.lower().strip()
+    if not text:
+        return []
+
+    tokens = re.findall(r"[a-z0-9]+", text)
+    return tokens
+
+
 def extract_words_from_testset():
-    """Extract word frequency dari test_set_skripsi berdasarkan label (0=negatif, 1=positif)"""
+    """Extract word frequency dari test_set_skripsi berdasarkan label, mencakup unigram dan bigram."""
     try:
-        df = pd.read_csv(ARTIFACTS / "test_set_skripsi.csv")
-        word_freq_neg = {}
-        word_freq_pos = {}
-        
+        test_path = ARTIFACTS / "test_set_skripsi.csv"
+        if not test_path.exists():
+            st.warning("File test_set_skripsi.csv tidak ditemukan di artifacts/")
+            return {}, {}
+
+        df = pd.read_csv(test_path)
+        word_freq_neg = Counter()
+        word_freq_pos = Counter()
+
         for _, row in df.iterrows():
             text = str(row.get('text', '')).strip()
             label = row.get('label')
-            
+
             if not text:
                 continue
-            
-            words = text.split()
-            
+
+            tokens = _tokenize_for_wordcloud(text)
+            if not tokens:
+                continue
+
+            ngrams = []
+            for n in range(1, 3):
+                if len(tokens) < n:
+                    continue
+                for start in range(len(tokens) - n + 1):
+                    ngrams.append(" ".join(tokens[start:start + n]))
+
             if label == 0:  # Negatif
-                for word in words:
-                    word = word.strip()
-                    if word:
-                        word_freq_neg[word] = word_freq_neg.get(word, 0) + 1
+                word_freq_neg.update(ngrams)
             elif label == 1:  # Positif
-                for word in words:
-                    word = word.strip()
-                    if word:
-                        word_freq_pos[word] = word_freq_pos.get(word, 0) + 1
-        
-        # Sort dan ambil top 50 words
-        top_words_neg = dict(sorted(word_freq_neg.items(), key=lambda x: x[1], reverse=True)[:50])
-        top_words_pos = dict(sorted(word_freq_pos.items(), key=lambda x: x[1], reverse=True)[:50])
-        
+                word_freq_pos.update(ngrams)
+
+        top_words_neg = dict(word_freq_neg.most_common(80))
+        top_words_pos = dict(word_freq_pos.most_common(80))
+
         return top_words_pos, top_words_neg
     except Exception as e:
         st.error(f"Error membaca test set: {e}")
@@ -378,16 +398,9 @@ def show_lda_visualization(lda_topics_pos, lda_topics_neg):
             topics_data_pos = []
             for topic in lda_topics_pos[:5]:
                 words_str = ", ".join(topic.get('words', []) if isinstance(topic.get('words'), list) else topic.get('words', '').split(", "))
-                # Handle weights - might be missing or in different format
-                weights = topic.get('weights', [])
-                if weights and isinstance(weights, (list, tuple)):
-                    weights_str = ", ".join([f"{float(w):.2f}" for w in weights])
-                else:
-                    weights_str = "N/A"
                 topics_data_pos.append({
                     "Topik": topic.get('topic_id', 0) + 1,
-                    "Kata Kunci": words_str,
-                    "Bobot": weights_str
+                    "Kata Kunci": words_str
                 })
             
             if topics_data_pos:
@@ -403,16 +416,9 @@ def show_lda_visualization(lda_topics_pos, lda_topics_neg):
             topics_data_neg = []
             for topic in lda_topics_neg[:5]:
                 words_str = ", ".join(topic.get('words', []) if isinstance(topic.get('words'), list) else topic.get('words', '').split(", "))
-                # Handle weights - might be missing or in different format
-                weights = topic.get('weights', [])
-                if weights and isinstance(weights, (list, tuple)):
-                    weights_str = ", ".join([f"{float(w):.2f}" for w in weights])
-                else:
-                    weights_str = "N/A"
                 topics_data_neg.append({
                     "Topik": topic.get('topic_id', 0) + 1,
-                    "Kata Kunci": words_str,
-                    "Bobot": weights_str
+                    "Kata Kunci": words_str
                 })
             
             if topics_data_neg:
@@ -421,8 +427,35 @@ def show_lda_visualization(lda_topics_pos, lda_topics_neg):
         else:
             st.info("Tidak ada data topik negatif")
 
-def show_sentiment_wordcloud(words_pos, words_neg):
-    """Tampilkan wordcloud dari stemmed text per sentiment"""
+def build_topic_wordcloud_data(lda_topics):
+    """Bangun data wordcloud dari kata kunci topic modeling, termasuk frasa dua kata."""
+    if not lda_topics:
+        return [], []
+
+    frequency_map = {}
+
+    for topic_idx, topic in enumerate(lda_topics[:5]):
+        topic_words = topic.get('words', []) if isinstance(topic.get('words', []), list) else []
+        if not topic_words:
+            continue
+
+        base_weight = max(10 - topic_idx, 1)
+        for keyword in topic_words:
+            if not isinstance(keyword, str):
+                continue
+            phrase = keyword.strip()
+            if not phrase:
+                continue
+            frequency_map[phrase] = frequency_map.get(phrase, 0) + base_weight
+
+    if not frequency_map:
+        return [], []
+
+    return list(frequency_map.keys()), list(frequency_map.values())
+
+
+def show_sentiment_wordcloud(words_pos, words_neg, lda_topics_pos=None, lda_topics_neg=None):
+    """Tampilkan wordcloud dari stemmed text per sentiment atau dari hasil topic modeling."""
     st.markdown("<div class='header-section'><h3>Visualisasi Kata Sentimen</h3></div>", unsafe_allow_html=True)
     
     col1, col2 = st.columns(2)
@@ -440,6 +473,20 @@ def show_sentiment_wordcloud(words_pos, words_neg):
             if fig:
                 st.pyplot(fig, use_container_width=True)
                 plt.close(fig)
+        elif lda_topics_pos:
+            topic_words_pos, topic_weights_pos = build_topic_wordcloud_data(lda_topics_pos)
+            if topic_words_pos:
+                fig = create_wordcloud_from_topic(
+                    topic_words_pos,
+                    topic_weights_pos,
+                    title="WordCloud Sentimen Positif",
+                    sentiment_color="positive"
+                )
+                if fig:
+                    st.pyplot(fig, use_container_width=True)
+                    plt.close(fig)
+            else:
+                st.info("Tidak ada data topik positif")
         else:
             st.info("Tidak ada data sentimen positif")
     
@@ -456,6 +503,20 @@ def show_sentiment_wordcloud(words_pos, words_neg):
             if fig:
                 st.pyplot(fig, use_container_width=True)
                 plt.close(fig)
+        elif lda_topics_neg:
+            topic_words_neg, topic_weights_neg = build_topic_wordcloud_data(lda_topics_neg)
+            if topic_words_neg:
+                fig = create_wordcloud_from_topic(
+                    topic_words_neg,
+                    topic_weights_neg,
+                    title="WordCloud Sentimen Negatif",
+                    sentiment_color="negative"
+                )
+                if fig:
+                    st.pyplot(fig, use_container_width=True)
+                    plt.close(fig)
+            else:
+                st.info("Tidak ada data topik negatif")
         else:
             st.info("Tidak ada data sentimen negatif")
 
@@ -1113,11 +1174,13 @@ else:
             show_lda_visualization(lda_topics_pos, lda_topics_neg)
         
         # Show sentiment wordcloud if available
-        words_pos = latest.get("words_pos", {})
-        words_neg = latest.get("words_neg", {})
+        words_pos, words_neg = extract_words_from_testset()
+        if not words_pos and not words_neg:
+            words_pos = latest.get("words_pos", {})
+            words_neg = latest.get("words_neg", {})
         if words_pos or words_neg:
             st.markdown("")
-            show_sentiment_wordcloud(words_pos, words_neg)
+            show_sentiment_wordcloud(words_pos, words_neg, lda_topics_pos, lda_topics_neg)
     
     # =========================
     # EVALUATION MODE
@@ -1152,11 +1215,13 @@ else:
             show_lda_visualization(lda_topics_pos, lda_topics_neg)
         
         # Show sentiment wordcloud if available
-        words_pos = latest.get("words_pos", {})
-        words_neg = latest.get("words_neg", {})
+        words_pos, words_neg = extract_words_from_testset()
+        if not words_pos and not words_neg:
+            words_pos = latest.get("words_pos", {})
+            words_neg = latest.get("words_neg", {})
         if words_pos or words_neg:
             st.markdown("")
-            show_sentiment_wordcloud(words_pos, words_neg)
+            show_sentiment_wordcloud(words_pos, words_neg, lda_topics_pos, lda_topics_neg)
     
     # Show sentiment analysis stages
     st.markdown("")
@@ -1447,56 +1512,46 @@ if st.session_state.admin:
                 lda_topics_neg = [
                     {
                         "topic_id": 0,
-                        "words": ["online", "hacker", "irit", "percaya", "banget", "lucu", "bahaya", "pemilu", "takut", "perintah"],
-                        "weights": [0.1, 0.09, 0.08, 0.07, 0.07, 0.07, 0.06, 0.06, 0.05, 0.05]
+                        "words": ["biar", "presiden", "gampang", "pilih", "tuju", "irit", "biar gampang", "nik", "curang", "tau"]
                     },
                     {
                         "topic_id": 1,
-                        "words": ["tuju", "main", "lawak", "tau", "pemilu", "negara", "hasil", "pegang", "no", "ku"],
-                        "weights": [0.1, 0.09, 0.08, 0.08, 0.07, 0.07, 0.06, 0.06, 0.05, 0.05]
+                        "words": ["data", "digital", "main", "lawak", "lucu", "big", "pemilu", "atur", "big data", "hp"]
                     },
                     {
                         "topic_id": 2,
-                        "words": ["data", "bocor", "biar", "manipulasi", "gampang", "mudah", "curang", "digital", "pemilu", "pakai"],
-                        "weights": [0.11, 0.09, 0.08, 0.07, 0.07, 0.07, 0.06, 0.06, 0.05, 0.05]
+                        "words": ["data", "mudah", "curang", "manipulasi", "orang", "manipulasi data", "tau", "hacker", "akun", "aman"]
                     },
                     {
                         "topic_id": 3,
-                        "words": ["presiden", "orang", "pilih", "akun", "langsung", "digital", "pakai", "tau", "hp", "tebak"],
-                        "weights": [0.1, 0.09, 0.08, 0.08, 0.07, 0.07, 0.06, 0.06, 0.05, 0.05]
+                        "words": ["data", "bocor", "menang", "digital", "data bocor", "pakai", "kemarin", "tau", "via", "manipulasi"]
                     },
                     {
                         "topic_id": 4,
-                        "words": ["menang", "digital", "pemilu", "suara", "indonesia", "tau", "pilih", "langsung", "curang", "negeri"],
-                        "weights": [0.09, 0.09, 0.08, 0.08, 0.07, 0.07, 0.06, 0.06, 0.05, 0.05]
+                        "words": ["pemilu", "online", "hasil", "suara", "percaya", "pakai", "digital", "banget", "manual", "manipulasi"]
                     }
                 ]
                 
                 lda_topics_pos = [
                     {
                         "topic_id": 0,
-                        "words": ["pemilu", "pilih", "pakai", "elektronik", "sistem", "suara", "voting", "ktp", "data", "nik"],
-                        "weights": [0.11, 0.09, 0.08, 0.08, 0.07, 0.07, 0.06, 0.06, 0.05, 0.05]
+                        "words": ["pemilu", "rakyat", "data", "sistem", "digital", "langsung", "konoha", "biaya", "kadang", "negara"]
                     },
                     {
                         "topic_id": 1,
-                        "words": ["pemilu", "digital", "negara", "online", "konoha", "banteng", "menang", "rakyat", "hemat", "data"],
-                        "weights": [0.1, 0.09, 0.08, 0.08, 0.07, 0.07, 0.06, 0.06, 0.05, 0.05]
+                        "words": ["kardus", "gembok", "kardus gembok", "pakai", "digital", "pemilu", "pakai kardus", "pilih", "hemat", "negara"]
                     },
                     {
                         "topic_id": 2,
-                        "words": ["pakai", "sistem", "voting", "pemilu", "akun", "pilih", "teknologi", "hati", "kadang", "digital"],
-                        "weights": [0.1, 0.09, 0.08, 0.08, 0.07, 0.07, 0.06, 0.06, 0.05, 0.05]
+                        "words": ["pemilu", "pakai", "sistem", "elektronik", "voting", "pilih", "ktp", "pemilu elektronik", "kertas", "bikin"]
                     },
                     {
                         "topic_id": 3,
-                        "words": ["kardus", "gembok", "menang", "pakai", "langsung", "kotak", "kemarin", "tebak", "digital", "paham"],
-                        "weights": [0.09, 0.09, 0.08, 0.08, 0.07, 0.07, 0.06, 0.06, 0.05, 0.05]
+                        "words": ["irit", "biar", "banteng", "menang", "biar irit", "langsung", "tebak", "pilih", "hati", "bbm"]
                     },
                     {
                         "topic_id": 4,
-                        "words": ["biar", "irit", "menang", "mudah", "rakyat", "no", "hemat", "langsung", "curang", "cerdas"],
-                        "weights": [0.09, 0.09, 0.08, 0.08, 0.07, 0.07, 0.06, 0.06, 0.06, 0.05]
+                        "words": ["menang", "biar", "pemilu", "mudah", "suara", "online", "main", "konoha", "biar menang", "pemilu online"]
                     }
                 ]
                 
