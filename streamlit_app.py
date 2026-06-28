@@ -3,6 +3,7 @@
 # =========================
 import json
 import re
+import os
 from collections import Counter
 from datetime import datetime
 from pathlib import Path
@@ -342,13 +343,19 @@ def _tokenize_for_wordcloud(text):
     return tokens
 
 
+@st.cache_data(ttl=300)
 def extract_words_from_testset():
     """Extract word frequency dari test_set_skripsi berdasarkan label, mencakup unigram dan bigram."""
     try:
-        test_path = ARTIFACTS / "test_set_skripsi.csv"
-        if not test_path.exists():
-            st.warning("File test_set_skripsi.csv tidak ditemukan di artifacts/")
-            return {}, {}
+        test_path = os.path.join(os.getcwd(), "artifacts", "test_set_skripsi.csv")
+        
+        if not os.path.exists(test_path):
+            # Fallback: coba pakai Path approach
+            test_path = ARTIFACTS / "test_set_skripsi.csv"
+            if not test_path.exists():
+                return {}, {}
+        else:
+            test_path = str(test_path)
 
         df = pd.read_csv(test_path)
         word_freq_neg = Counter()
@@ -382,7 +389,6 @@ def extract_words_from_testset():
 
         return top_words_pos, top_words_neg
     except Exception as e:
-        st.error(f"Error membaca test set: {e}")
         return {}, {}
 
 def show_lda_visualization(lda_topics_pos, lda_topics_neg):

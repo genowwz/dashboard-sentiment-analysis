@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Visualisasi Analisis Sentimen E-Voting",
-    "timestamp": "17:13:07",
+    "timestamp": "02:29:34",
     "n_rows": 796,
     "n_valid_rows": 796,
     "note": "Soft Voting ensemble models dari Colab training"
@@ -65,7 +65,7 @@
     }
   ],
   "confusions": {
-    "Soft Voting Baseline Tanpa SMOTE": [
+    "Soft Voting Baseline + SMOTE": [
       [
         419,
         88
@@ -75,7 +75,7 @@
         217
       ]
     ],
-    "Soft Voting Baseline + SMOTE": [
+    "Soft Voting Baseline Tanpa SMOTE": [
       [
         472,
         35
@@ -330,6 +330,36 @@
     "Logistic Regression Tuning": {
       "folds": [
         {
+          "Training Accuracy": 0.87,
+          "Validation Accuracy": 0.774
+        },
+        {
+          "Training Accuracy": 0.872,
+          "Validation Accuracy": 0.812
+        },
+        {
+          "Training Accuracy": 0.873,
+          "Validation Accuracy": 0.783
+        },
+        {
+          "Training Accuracy": 0.871,
+          "Validation Accuracy": 0.799
+        },
+        {
+          "Training Accuracy": 0.872,
+          "Validation Accuracy": 0.811
+        }
+      ],
+      "stats": {
+        "avg_train": 0.8717,
+        "avg_val": 0.7958,
+        "val_std": 0.015,
+        "gap": 0.0759
+      }
+    },
+    "Random Forest Tuning": {
+      "folds": [
+        {
           "Training Accuracy": 0.809,
           "Validation Accuracy": 0.75
         },
@@ -365,135 +395,75 @@
       "topic_id": 0,
       "words": [
         "pemilu",
-        "pilih",
-        "pakai",
-        "elektronik",
-        "sistem",
-        "suara",
-        "voting",
-        "ktp",
+        "rakyat",
         "data",
-        "nik"
-      ],
-      "weights": [
-        0.11,
-        0.09,
-        0.08,
-        0.08,
-        0.07,
-        0.07,
-        0.06,
-        0.06,
-        0.05,
-        0.05
+        "sistem",
+        "digital",
+        "langsung",
+        "konoha",
+        "biaya",
+        "kadang",
+        "negara"
       ]
     },
     {
       "topic_id": 1,
       "words": [
-        "pemilu",
+        "kardus",
+        "gembok",
+        "kardus gembok",
+        "pakai",
         "digital",
-        "negara",
-        "online",
-        "konoha",
-        "banteng",
-        "menang",
-        "rakyat",
+        "pemilu",
+        "pakai kardus",
+        "pilih",
         "hemat",
-        "data"
-      ],
-      "weights": [
-        0.1,
-        0.09,
-        0.08,
-        0.08,
-        0.07,
-        0.07,
-        0.06,
-        0.06,
-        0.05,
-        0.05
+        "negara"
       ]
     },
     {
       "topic_id": 2,
       "words": [
+        "pemilu",
         "pakai",
         "sistem",
+        "elektronik",
         "voting",
-        "pemilu",
-        "akun",
         "pilih",
-        "teknologi",
-        "hati",
-        "kadang",
-        "digital"
-      ],
-      "weights": [
-        0.1,
-        0.09,
-        0.08,
-        0.08,
-        0.07,
-        0.07,
-        0.06,
-        0.06,
-        0.05,
-        0.05
+        "ktp",
+        "pemilu elektronik",
+        "kertas",
+        "bikin"
       ]
     },
     {
       "topic_id": 3,
       "words": [
-        "kardus",
-        "gembok",
+        "irit",
+        "biar",
+        "banteng",
         "menang",
-        "pakai",
+        "biar irit",
         "langsung",
-        "kotak",
-        "kemarin",
         "tebak",
-        "digital",
-        "paham"
-      ],
-      "weights": [
-        0.09,
-        0.09,
-        0.08,
-        0.08,
-        0.07,
-        0.07,
-        0.06,
-        0.06,
-        0.05,
-        0.05
+        "pilih",
+        "hati",
+        "bbm"
       ]
     },
     {
       "topic_id": 4,
       "words": [
-        "biar",
-        "irit",
         "menang",
+        "biar",
+        "pemilu",
         "mudah",
-        "rakyat",
-        "no",
-        "hemat",
-        "langsung",
-        "curang",
-        "cerdas"
-      ],
-      "weights": [
-        0.09,
-        0.09,
-        0.08,
-        0.08,
-        0.07,
-        0.07,
-        0.06,
-        0.06,
-        0.06,
-        0.05
+        "suara",
+        "online",
+        "main",
+        "konoha",
+        "biar menang",
+        "pemilu online"
       ]
     }
   ],
@@ -501,136 +471,76 @@
     {
       "topic_id": 0,
       "words": [
-        "online",
-        "hacker",
+        "biar",
+        "presiden",
+        "gampang",
+        "pilih",
+        "tuju",
         "irit",
-        "percaya",
-        "banget",
-        "lucu",
-        "bahaya",
-        "pemilu",
-        "takut",
-        "perintah"
-      ],
-      "weights": [
-        0.1,
-        0.09,
-        0.08,
-        0.07,
-        0.07,
-        0.07,
-        0.06,
-        0.06,
-        0.05,
-        0.05
+        "biar gampang",
+        "nik",
+        "curang",
+        "tau"
       ]
     },
     {
       "topic_id": 1,
       "words": [
-        "tuju",
+        "data",
+        "digital",
         "main",
         "lawak",
-        "tau",
+        "lucu",
+        "big",
         "pemilu",
-        "negara",
-        "hasil",
-        "pegang",
-        "no",
-        "ku"
-      ],
-      "weights": [
-        0.1,
-        0.09,
-        0.08,
-        0.08,
-        0.07,
-        0.07,
-        0.06,
-        0.06,
-        0.05,
-        0.05
+        "atur",
+        "big data",
+        "hp"
       ]
     },
     {
       "topic_id": 2,
       "words": [
         "data",
-        "bocor",
-        "biar",
-        "manipulasi",
-        "gampang",
         "mudah",
         "curang",
-        "digital",
-        "pemilu",
-        "pakai"
-      ],
-      "weights": [
-        0.11,
-        0.09,
-        0.08,
-        0.07,
-        0.07,
-        0.07,
-        0.06,
-        0.06,
-        0.05,
-        0.05
+        "manipulasi",
+        "orang",
+        "manipulasi data",
+        "tau",
+        "hacker",
+        "akun",
+        "aman"
       ]
     },
     {
       "topic_id": 3,
       "words": [
-        "presiden",
-        "orang",
-        "pilih",
-        "akun",
-        "langsung",
+        "data",
+        "bocor",
+        "menang",
         "digital",
+        "data bocor",
         "pakai",
+        "kemarin",
         "tau",
-        "hp",
-        "tebak"
-      ],
-      "weights": [
-        0.1,
-        0.09,
-        0.08,
-        0.08,
-        0.07,
-        0.07,
-        0.06,
-        0.06,
-        0.05,
-        0.05
+        "via",
+        "manipulasi"
       ]
     },
     {
       "topic_id": 4,
       "words": [
-        "menang",
-        "digital",
         "pemilu",
+        "online",
+        "hasil",
         "suara",
-        "indonesia",
-        "tau",
-        "pilih",
-        "langsung",
-        "curang",
-        "negeri"
-      ],
-      "weights": [
-        0.09,
-        0.09,
-        0.08,
-        0.08,
-        0.07,
-        0.07,
-        0.06,
-        0.06,
-        0.05,
-        0.05
+        "percaya",
+        "pakai",
+        "digital",
+        "banget",
+        "manual",
+        "manipulasi"
       ]
     }
   ],

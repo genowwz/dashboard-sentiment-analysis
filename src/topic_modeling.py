@@ -86,8 +86,7 @@ def _generate_lda_for_sentiment(
         [
             {
                 "topic_id": 0,
-                "words": ["word1", "word2", ...],
-                "weights": [0.1, 0.09, ...]
+                "words": ["word1", "word2", ...]
             },
             ...
         ]
@@ -135,12 +134,10 @@ def _generate_lda_for_sentiment(
             # Get top words indices
             top_indices = topic.argsort()[-n_top_words:][::-1]
             top_words = [str(feature_names[i]) for i in top_indices]
-            top_weights = [float(topic[i]) for i in top_indices]
             
             topics.append({
                 "topic_id": topic_idx,
-                "words": top_words,
-                "weights": top_weights
+                "words": top_words
             })
         
         return topics
