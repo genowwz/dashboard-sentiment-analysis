@@ -19,8 +19,20 @@ class WordcloudSourceTests(unittest.TestCase):
 
         self.assertEqual(result, ({"upload": 5}, {"buruk": 2}))
 
+    def test_prediction_mode_uses_uploaded_words_from_meta(self):
+        latest = {
+            "meta": {"mode": "prediction"},
+            "words_pos": {"upload": 3},
+            "words_neg": {"jelek": 4},
+        }
+
+        with patch.object(streamlit_app, "extract_words_from_testset", return_value=({"test": 1}, {"test_neg": 1})):
+            result = streamlit_app.get_wordcloud_data_for_display(latest)
+
+        self.assertEqual(result, ({"upload": 3}, {"jelek": 4}))
+
     def test_evaluation_mode_falls_back_to_testset(self):
-        latest = {"mode": "evaluation"}
+        latest = {"meta": {"mode": "evaluation"}}
 
         with patch.object(streamlit_app, "extract_words_from_testset", return_value=({"test": 1}, {"test_neg": 1})):
             result = streamlit_app.get_wordcloud_data_for_display(latest)

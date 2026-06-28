@@ -398,11 +398,10 @@ def get_wordcloud_data_for_display(latest_result=None):
     if latest_result is None:
         latest_result = load_latest_result()
 
-    if isinstance(latest_result, dict) and latest_result.get("mode") == "prediction":
-        words_pos = latest_result.get("words_pos") or {}
-        words_neg = latest_result.get("words_neg") or {}
-        if words_pos or words_neg:
-            return words_pos, words_neg
+    if isinstance(latest_result, dict):
+        mode = latest_result.get("mode") or latest_result.get("meta", {}).get("mode")
+        if mode == "prediction":
+            return latest_result.get("words_pos", {}), latest_result.get("words_neg", {})
 
     return extract_words_from_testset()
 
@@ -1671,6 +1670,7 @@ if st.session_state.admin:
                             "n_rows": len(df),
                             "mode": "prediction"
                         },
+                        "mode": "prediction",
                         "predictions_df": df_predictions.to_dict(orient="records"),
                         "processed_texts": processed_texts if processed_texts else [],
                         "lda_topics_pos": lda_topics_pos,
