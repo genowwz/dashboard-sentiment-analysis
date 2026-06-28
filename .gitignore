@@ -23,6 +23,7 @@ build/
 # Uploads dan temporary files
 uploads/
 *.csv
+!artifacts/**/*.csv
 *.joblib
 
 # Environment variables
