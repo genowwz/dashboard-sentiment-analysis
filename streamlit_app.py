@@ -1196,12 +1196,8 @@ else:
             st.markdown("")
             show_lda_visualization(lda_topics_pos, lda_topics_neg)
         
-        # Show sentiment wordcloud if available
-        words_pos = latest.get("words_pos", {})
-        words_neg = latest.get("words_neg", {})
-        
-        if not words_pos or not words_neg:
-            words_pos, words_neg = extract_words_from_testset()
+        # Show sentiment wordcloud if available - ALWAYS use fresh extraction from test set
+        words_pos, words_neg = extract_words_from_testset()
         
         if words_pos or words_neg:
             st.markdown("")
@@ -1239,12 +1235,8 @@ else:
             st.markdown("")
             show_lda_visualization(lda_topics_pos, lda_topics_neg)
         
-        # Show sentiment wordcloud if available
-        words_pos = latest.get("words_pos", {})
-        words_neg = latest.get("words_neg", {})
-        
-        if not words_pos or not words_neg:
-            words_pos, words_neg = extract_words_from_testset()
+        # Show sentiment wordcloud if available - ALWAYS use fresh extraction from test set
+        words_pos, words_neg = extract_words_from_testset()
         
         if words_pos or words_neg:
             st.markdown("")
