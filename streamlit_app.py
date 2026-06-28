@@ -381,8 +381,8 @@ def extract_words_from_testset():
             elif label == 1:  # Positif
                 word_freq_pos.update(ngrams)
 
-        top_words_neg = dict(word_freq_neg.most_common(80))
-        top_words_pos = dict(word_freq_pos.most_common(80))
+        top_words_neg = dict(word_freq_neg.most_common(500))
+        top_words_pos = dict(word_freq_pos.most_common(500))
         
         if top_words_pos and top_words_neg:
             return top_words_pos, top_words_neg
