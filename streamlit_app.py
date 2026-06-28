@@ -393,6 +393,20 @@ def extract_words_from_testset():
         return get_default_wordcloud_data()
 
 
+def get_wordcloud_data_for_display(latest_result=None):
+    """Pilih sumber data wordcloud yang sesuai dengan mode hasil terakhir."""
+    if latest_result is None:
+        latest_result = load_latest_result()
+
+    if isinstance(latest_result, dict) and latest_result.get("mode") == "prediction":
+        words_pos = latest_result.get("words_pos") or {}
+        words_neg = latest_result.get("words_neg") or {}
+        if words_pos or words_neg:
+            return words_pos, words_neg
+
+    return extract_words_from_testset()
+
+
 def get_default_wordcloud_data():
     """Provide default wordcloud data as fallback."""
     words_pos = {
@@ -1197,8 +1211,8 @@ else:
             st.markdown("")
             show_lda_visualization(lda_topics_pos, lda_topics_neg)
         
-        # Show sentiment wordcloud if available - ALWAYS use fresh extraction from test set
-        words_pos, words_neg = extract_words_from_testset()
+        # Show sentiment wordcloud sesuai dengan sumber data hasil terakhir
+        words_pos, words_neg = get_wordcloud_data_for_display(latest)
         
         if words_pos or words_neg:
             st.markdown("")
@@ -1236,8 +1250,8 @@ else:
             st.markdown("")
             show_lda_visualization(lda_topics_pos, lda_topics_neg)
         
-        # Show sentiment wordcloud if available - ALWAYS use fresh extraction from test set
-        words_pos, words_neg = extract_words_from_testset()
+        # Show sentiment wordcloud sesuai dengan sumber data hasil terakhir
+        words_pos, words_neg = get_wordcloud_data_for_display(latest)
         
         if words_pos or words_neg:
             st.markdown("")
