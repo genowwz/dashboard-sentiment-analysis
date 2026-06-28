@@ -212,46 +212,40 @@ def create_wordcloud_from_topic(words, weights, title="", sentiment_color="blue"
     # Create word frequency dictionary
     word_freq = {word: weight for word, weight in zip(words, weights)}
     
-    # Generate wordcloud dengan parameter yang lebih baik
+    # Generate wordcloud dengan parameter yang lebih baik (sesuai Colab)
     if sentiment_color == "positive":
         # Green colormap untuk positif
         wordcloud = WordCloud(
             width=800,
-            height=500,
+            height=400,
             background_color="white",
             colormap="Greens",
-            relative_scaling=0.5,
-            min_font_size=20,
-            max_font_size=120,
-            prefer_horizontal=0.7
+            max_words=500,
+            collocations=False
         ).generate_from_frequencies(word_freq)
     elif sentiment_color == "negative":
         # Red colormap untuk negatif
         wordcloud = WordCloud(
             width=800,
-            height=500,
+            height=400,
             background_color="white",
             colormap="Reds",
-            relative_scaling=0.5,
-            min_font_size=20,
-            max_font_size=120,
-            prefer_horizontal=0.7
+            max_words=500,
+            collocations=False
         ).generate_from_frequencies(word_freq)
     else:
         # Blue default
         wordcloud = WordCloud(
             width=800,
-            height=500,
+            height=400,
             background_color="white",
             colormap="Blues",
-            relative_scaling=0.5,
-            min_font_size=20,
-            max_font_size=120,
-            prefer_horizontal=0.7
+            max_words=500,
+            collocations=False
         ).generate_from_frequencies(word_freq)
     
-    # Create matplotlib figure dengan ukuran lebih besar
-    fig, ax = plt.subplots(figsize=(12, 7), dpi=100)
+    # Create matplotlib figure
+    fig, ax = plt.subplots(figsize=(10, 5), dpi=100)
     ax.imshow(wordcloud, interpolation="bilinear")
     ax.axis("off")
     if title:
@@ -345,8 +339,10 @@ def _tokenize_for_wordcloud(text):
 
 @st.cache_data(ttl=300)
 def extract_words_from_testset():
-    """Extract word frequency dari test_set_skripsi berdasarkan label, mencakup unigram dan bigram."""
+    """Extract word frequency dari test_set_skripsi menggunakan CountVectorizer (unigram + bigram)."""
     try:
+        from sklearn.feature_extraction.text import CountVectorizer
+        
         test_path = os.path.join(os.getcwd(), "artifacts", "test_set_skripsi.csv")
         
         if not os.path.exists(test_path):
@@ -355,37 +351,42 @@ def extract_words_from_testset():
                 return get_default_wordcloud_data()
 
         df = pd.read_csv(test_path)
-        word_freq_neg = Counter()
-        word_freq_pos = Counter()
-
-        for _, row in df.iterrows():
-            text = str(row.get('text', '')).strip()
-            label = row.get('label')
-
-            if not text:
-                continue
-
-            tokens = _tokenize_for_wordcloud(text)
-            if not tokens:
-                continue
-
-            ngrams = []
-            for n in range(1, 3):
-                if len(tokens) < n:
-                    continue
-                for start in range(len(tokens) - n + 1):
-                    ngrams.append(" ".join(tokens[start:start + n]))
-
-            if label == 0:  # Negatif
-                word_freq_neg.update(ngrams)
-            elif label == 1:  # Positif
-                word_freq_pos.update(ngrams)
-
-        top_words_neg = dict(word_freq_neg.most_common(500))
-        top_words_pos = dict(word_freq_pos.most_common(500))
         
-        if top_words_pos and top_words_neg:
-            return top_words_pos, top_words_neg
+        # Pastikan text tidak kosong
+        df['text'] = df['text'].fillna("").astype(str)
+        
+        # Pisahkan berdasarkan label
+        negative_texts = df[df['label'] == 0]['text']
+        positive_texts = df[df['label'] == 1]['text']
+        
+        # CountVectorizer untuk unigram + bigram
+        vectorizer = CountVectorizer(
+            ngram_range=(1, 2),
+            max_features=2000,
+            min_df=3,
+            max_df=0.95
+        )
+        
+        # Extract frequencies untuk negatif
+        if len(negative_texts) > 0:
+            X_neg = vectorizer.fit_transform(negative_texts)
+            feature_names_neg = vectorizer.get_feature_names_out()
+            frequencies_neg = X_neg.sum(axis=0).A1
+            words_neg = dict(zip(feature_names_neg, frequencies_neg))
+        else:
+            words_neg = {}
+        
+        # Extract frequencies untuk positif
+        if len(positive_texts) > 0:
+            X_pos = vectorizer.fit_transform(positive_texts)
+            feature_names_pos = vectorizer.get_feature_names_out()
+            frequencies_pos = X_pos.sum(axis=0).A1
+            words_pos = dict(zip(feature_names_pos, frequencies_pos))
+        else:
+            words_pos = {}
+        
+        if words_pos and words_neg:
+            return words_pos, words_neg
         else:
             return get_default_wordcloud_data()
     except Exception as e:
