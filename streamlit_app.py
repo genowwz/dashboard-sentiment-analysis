@@ -1020,7 +1020,7 @@ def show_single_comment_result(result: dict):
     st.markdown("<div class='header-section'><h3>Hasil Prediksi Komentar</h3></div>", unsafe_allow_html=True)
     label = result.get("label", "-")
     # Default model name (single best model used in backend)
-    model_name = result.get("model", "Soft Voting Tuned")
+    model_name = result.get("model", "Soft Voting Tuning")
 
     prob_pos = result.get("prob_pos") or 0.0
     prob_neg = result.get("prob_neg") or 0.0
