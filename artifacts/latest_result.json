@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Visualisasi Analisis Sentimen E-Voting",
-    "timestamp": "02:29:34",
+    "timestamp": "00:51:15",
     "n_rows": 796,
     "n_valid_rows": 796,
     "note": "Soft Voting ensemble models dari Colab training"
@@ -37,10 +37,10 @@
     },
     {
       "Model": "Soft Voting Tuning + SMOTE",
-      "Accuracy": 0.7902,
-      "Precision": 0.7929,
-      "Recall": 0.7902,
-      "F1": 0.7913
+      "Accuracy": 0.799,
+      "Precision": 0.8014,
+      "Recall": 0.79,
+      "F1": 0.8
     },
     {
       "Model": "Soft Voting Tuning Tanpa SMOTE",
@@ -51,10 +51,10 @@
     },
     {
       "Model": "Logistic Regression Tuning",
-      "Accuracy": 0.7965,
-      "Precision": 0.7945,
-      "Recall": 0.7965,
-      "F1": 0.7904
+      "Accuracy": 0.7902,
+      "Precision": 0.7884,
+      "Recall": 0.7902,
+      "F1": 0.7829
     },
     {
       "Model": "Random Forest Tuning",
@@ -107,12 +107,12 @@
     ],
     "Soft Voting Tuning + SMOTE": [
       [
-        416,
-        91
+        420,
+        87
       ],
       [
-        76,
-        213
+        73,
+        216
       ]
     ],
     "Soft Voting Tuning Tanpa SMOTE": [
@@ -127,12 +127,12 @@
     ],
     "Logistic Regression Tuning": [
       [
-        456,
-        51
+        457,
+        50
       ],
       [
-        111,
-        178
+        117,
+        172
       ]
     ],
     "Random Forest Tuning": [
@@ -150,241 +150,401 @@
     "Soft Voting Baseline + SMOTE": {
       "folds": [
         {
-          "Training Accuracy": 0.871,
-          "Validation Accuracy": 0.75
+          "Training Accuracy": 0.8652,
+          "Validation Accuracy": 0.7618
+        },
+        {
+          "Training Accuracy": 0.867,
+          "Validation Accuracy": 0.7461
+        },
+        {
+          "Training Accuracy": 0.8614,
+          "Validation Accuracy": 0.7712
+        },
+        {
+          "Training Accuracy": 0.867,
+          "Validation Accuracy": 0.7767
+        },
+        {
+          "Training Accuracy": 0.8632,
+          "Validation Accuracy": 0.7736
         },
         {
           "Training Accuracy": 0.866,
-          "Validation Accuracy": 0.783
+          "Validation Accuracy": 0.7799
         },
         {
-          "Training Accuracy": 0.863,
-          "Validation Accuracy": 0.777
+          "Training Accuracy": 0.8653,
+          "Validation Accuracy": 0.8208
         },
         {
-          "Training Accuracy": 0.863,
-          "Validation Accuracy": 0.797
+          "Training Accuracy": 0.8642,
+          "Validation Accuracy": 0.761
         },
         {
-          "Training Accuracy": 0.866,
-          "Validation Accuracy": 0.802
+          "Training Accuracy": 0.8642,
+          "Validation Accuracy": 0.8019
+        },
+        {
+          "Training Accuracy": 0.8593,
+          "Validation Accuracy": 0.7987
         }
       ],
       "stats": {
-        "avg_train": 0.8659,
-        "avg_val": 0.782,
-        "val_std": 0.0182,
-        "gap": 0.0839
+        "avg_train": 0.8643,
+        "avg_val": 0.7792,
+        "val_std": 0.0211,
+        "gap": 0.0851
       }
     },
     "Soft Voting Baseline Tanpa SMOTE": {
       "folds": [
         {
-          "Training Accuracy": 0.819,
-          "Validation Accuracy": 0.763
+          "Training Accuracy": 0.8191,
+          "Validation Accuracy": 0.7618
         },
         {
-          "Training Accuracy": 0.818,
-          "Validation Accuracy": 0.796
+          "Training Accuracy": 0.8226,
+          "Validation Accuracy": 0.7524
         },
         {
-          "Training Accuracy": 0.824,
-          "Validation Accuracy": 0.76
+          "Training Accuracy": 0.8209,
+          "Validation Accuracy": 0.8119
         },
         {
-          "Training Accuracy": 0.82,
-          "Validation Accuracy": 0.756
+          "Training Accuracy": 0.8195,
+          "Validation Accuracy": 0.783
         },
         {
-          "Training Accuracy": 0.817,
-          "Validation Accuracy": 0.8
+          "Training Accuracy": 0.8206,
+          "Validation Accuracy": 0.7767
+        },
+        {
+          "Training Accuracy": 0.822,
+          "Validation Accuracy": 0.7484
+        },
+        {
+          "Training Accuracy": 0.8202,
+          "Validation Accuracy": 0.7767
+        },
+        {
+          "Training Accuracy": 0.8244,
+          "Validation Accuracy": 0.7547
+        },
+        {
+          "Training Accuracy": 0.8216,
+          "Validation Accuracy": 0.7893
+        },
+        {
+          "Training Accuracy": 0.8192,
+          "Validation Accuracy": 0.7925
         }
       ],
       "stats": {
-        "avg_train": 0.8195,
-        "avg_val": 0.7751,
-        "val_std": 0.019,
-        "gap": 0.0445
+        "avg_train": 0.821,
+        "avg_val": 0.7747,
+        "val_std": 0.0194,
+        "gap": 0.0463
       }
     },
     "Soft Voting Optimasi Awal + SMOTE": {
       "folds": [
         {
-          "Training Accuracy": 0.903,
-          "Validation Accuracy": 0.755
+          "Training Accuracy": 0.8956,
+          "Validation Accuracy": 0.7712
         },
         {
-          "Training Accuracy": 0.899,
-          "Validation Accuracy": 0.794
+          "Training Accuracy": 0.8994,
+          "Validation Accuracy": 0.7367
         },
         {
-          "Training Accuracy": 0.899,
-          "Validation Accuracy": 0.765
+          "Training Accuracy": 0.8959,
+          "Validation Accuracy": 0.7743
         },
         {
-          "Training Accuracy": 0.901,
-          "Validation Accuracy": 0.792
+          "Training Accuracy": 0.8991,
+          "Validation Accuracy": 0.7642
         },
         {
-          "Training Accuracy": 0.902,
-          "Validation Accuracy": 0.803
+          "Training Accuracy": 0.8995,
+          "Validation Accuracy": 0.7799
+        },
+        {
+          "Training Accuracy": 0.8991,
+          "Validation Accuracy": 0.783
+        },
+        {
+          "Training Accuracy": 0.8984,
+          "Validation Accuracy": 0.8113
+        },
+        {
+          "Training Accuracy": 0.8995,
+          "Validation Accuracy": 0.7579
+        },
+        {
+          "Training Accuracy": 0.8974,
+          "Validation Accuracy": 0.8113
+        },
+        {
+          "Training Accuracy": 0.8974,
+          "Validation Accuracy": 0.8019
         }
       ],
       "stats": {
-        "avg_train": 0.9008,
-        "avg_val": 0.782,
-        "val_std": 0.1188,
-        "gap": 0.0187
+        "avg_train": 0.8981,
+        "avg_val": 0.7792,
+        "val_std": 0.0227,
+        "gap": 0.119
       }
     },
     "Soft Voting Optimasi Awal Tanpa SMOTE": {
       "folds": [
         {
-          "Training Accuracy": 0.888,
-          "Validation Accuracy": 0.769
+          "Training Accuracy": 0.8816,
+          "Validation Accuracy": 0.7774
         },
         {
-          "Training Accuracy": 0.888,
-          "Validation Accuracy": 0.805
+          "Training Accuracy": 0.8848,
+          "Validation Accuracy": 0.7618
         },
         {
-          "Training Accuracy": 0.887,
-          "Validation Accuracy": 0.786
+          "Training Accuracy": 0.883,
+          "Validation Accuracy": 0.8182
         },
         {
-          "Training Accuracy": 0.885,
-          "Validation Accuracy": 0.8
+          "Training Accuracy": 0.8841,
+          "Validation Accuracy": 0.7862
+        },
+        {
+          "Training Accuracy": 0.8831,
+          "Validation Accuracy": 0.7925
+        },
+        {
+          "Training Accuracy": 0.8866,
+          "Validation Accuracy": 0.7799
+        },
+        {
+          "Training Accuracy": 0.8796,
+          "Validation Accuracy": 0.8082
+        },
+        {
+          "Training Accuracy": 0.8799,
+          "Validation Accuracy": 0.7767
+        },
+        {
+          "Training Accuracy": 0.8841,
+          "Validation Accuracy": 0.8176
         },
         {
           "Training Accuracy": 0.881,
-          "Validation Accuracy": 0.816
+          "Validation Accuracy": 0.8082
         }
       ],
       "stats": {
-        "avg_train": 0.8856,
-        "avg_val": 0.7955,
-        "val_std": 0.0162,
+        "avg_train": 0.8828,
+        "avg_val": 0.7927,
+        "val_std": 0.0184,
         "gap": 0.0901
       }
     },
     "Soft Voting Tuning + SMOTE": {
       "folds": [
         {
-          "Training Accuracy": 0.866,
-          "Validation Accuracy": 0.749
+          "Training Accuracy": 0.8701,
+          "Validation Accuracy": 0.7586
         },
         {
-          "Training Accuracy": 0.86,
-          "Validation Accuracy": 0.779
+          "Training Accuracy": 0.8729,
+          "Validation Accuracy": 0.7398
         },
         {
-          "Training Accuracy": 0.855,
+          "Training Accuracy": 0.8656,
+          "Validation Accuracy": 0.7712
+        },
+        {
+          "Training Accuracy": 0.8698,
+          "Validation Accuracy": 0.7736
+        },
+        {
+          "Training Accuracy": 0.8674,
+          "Validation Accuracy": 0.7736
+        },
+        {
+          "Training Accuracy": 0.8677,
           "Validation Accuracy": 0.783
         },
         {
-          "Training Accuracy": 0.858,
-          "Validation Accuracy": 0.794
+          "Training Accuracy": 0.8684,
+          "Validation Accuracy": 0.8176
         },
         {
-          "Training Accuracy": 0.859,
-          "Validation Accuracy": 0.8
+          "Training Accuracy": 0.8705,
+          "Validation Accuracy": 0.761
+        },
+        {
+          "Training Accuracy": 0.8677,
+          "Validation Accuracy": 0.8113
+        },
+        {
+          "Training Accuracy": 0.8628,
+          "Validation Accuracy": 0.7925
         }
       ],
       "stats": {
-        "avg_train": 0.8596,
-        "avg_val": 0.781,
-        "val_std": 0.0178,
-        "gap": 0.0786
+        "avg_train": 0.8683,
+        "avg_val": 0.7782,
+        "val_std": 0.0226,
+        "gap": 0.0901
       }
     },
     "Soft Voting Tuning Tanpa SMOTE": {
       "folds": [
         {
-          "Training Accuracy": 0.858,
-          "Validation Accuracy": 0.772
+          "Training Accuracy": 0.8544,
+          "Validation Accuracy": 0.7868
         },
         {
-          "Training Accuracy": 0.86,
-          "Validation Accuracy": 0.794
+          "Training Accuracy": 0.8586,
+          "Validation Accuracy": 0.7649
         },
         {
-          "Training Accuracy": 0.864,
-          "Validation Accuracy": 0.777
+          "Training Accuracy": 0.8558,
+          "Validation Accuracy": 0.815
         },
         {
-          "Training Accuracy": 0.856,
-          "Validation Accuracy": 0.781
+          "Training Accuracy": 0.8562,
+          "Validation Accuracy": 0.7799
         },
         {
-          "Training Accuracy": 0.852,
-          "Validation Accuracy": 0.811
+          "Training Accuracy": 0.8583,
+          "Validation Accuracy": 0.7893
+        },
+        {
+          "Training Accuracy": 0.8625,
+          "Validation Accuracy": 0.7673
+        },
+        {
+          "Training Accuracy": 0.8506,
+          "Validation Accuracy": 0.7925
+        },
+        {
+          "Training Accuracy": 0.8569,
+          "Validation Accuracy": 0.7736
+        },
+        {
+          "Training Accuracy": 0.8541,
+          "Validation Accuracy": 0.805
+        },
+        {
+          "Training Accuracy": 0.8541,
+          "Validation Accuracy": 0.805
         }
       ],
       "stats": {
-        "avg_train": 0.8579,
-        "avg_val": 0.7873,
-        "val_std": 0.0141,
-        "gap": 0.0706
+        "avg_train": 0.8561,
+        "avg_val": 0.7879,
+        "val_std": 0.016,
+        "gap": 0.0682
       }
     },
     "Logistic Regression Tuning": {
       "folds": [
         {
-          "Training Accuracy": 0.87,
-          "Validation Accuracy": 0.774
+          "Training Accuracy": 0.8589,
+          "Validation Accuracy": 0.7806
         },
         {
-          "Training Accuracy": 0.872,
-          "Validation Accuracy": 0.812
+          "Training Accuracy": 0.8666,
+          "Validation Accuracy": 0.7743
         },
         {
-          "Training Accuracy": 0.873,
-          "Validation Accuracy": 0.783
+          "Training Accuracy": 0.8645,
+          "Validation Accuracy": 0.8213
         },
         {
-          "Training Accuracy": 0.871,
-          "Validation Accuracy": 0.799
+          "Training Accuracy": 0.867,
+          "Validation Accuracy": 0.7925
         },
         {
-          "Training Accuracy": 0.872,
-          "Validation Accuracy": 0.811
+          "Training Accuracy": 0.8618,
+          "Validation Accuracy": 0.7893
+        },
+        {
+          "Training Accuracy": 0.8642,
+          "Validation Accuracy": 0.7704
+        },
+        {
+          "Training Accuracy": 0.8597,
+          "Validation Accuracy": 0.8082
+        },
+        {
+          "Training Accuracy": 0.8656,
+          "Validation Accuracy": 0.7767
+        },
+        {
+          "Training Accuracy": 0.8635,
+          "Validation Accuracy": 0.8176
+        },
+        {
+          "Training Accuracy": 0.8639,
+          "Validation Accuracy": 0.8082
         }
       ],
       "stats": {
-        "avg_train": 0.8717,
-        "avg_val": 0.7958,
-        "val_std": 0.015,
-        "gap": 0.0759
+        "avg_train": 0.8636,
+        "avg_val": 0.7939,
+        "val_std": 0.0178,
+        "gap": 0.0697
       }
     },
     "Random Forest Tuning": {
       "folds": [
         {
-          "Training Accuracy": 0.809,
-          "Validation Accuracy": 0.75
+          "Training Accuracy": 0.7996,
+          "Validation Accuracy": 0.7429
         },
         {
-          "Training Accuracy": 0.815,
-          "Validation Accuracy": 0.785
+          "Training Accuracy": 0.8139,
+          "Validation Accuracy": 0.7398
         },
         {
-          "Training Accuracy": 0.81,
-          "Validation Accuracy": 0.744
+          "Training Accuracy": 0.8055,
+          "Validation Accuracy": 0.8056
         },
         {
-          "Training Accuracy": 0.812,
-          "Validation Accuracy": 0.747
+          "Training Accuracy": 0.8066,
+          "Validation Accuracy": 0.761
         },
         {
-          "Training Accuracy": 0.804,
-          "Validation Accuracy": 0.786
+          "Training Accuracy": 0.808,
+          "Validation Accuracy": 0.7673
+        },
+        {
+          "Training Accuracy": 0.8094,
+          "Validation Accuracy": 0.7233
+        },
+        {
+          "Training Accuracy": 0.807,
+          "Validation Accuracy": 0.7673
+        },
+        {
+          "Training Accuracy": 0.8119,
+          "Validation Accuracy": 0.7264
+        },
+        {
+          "Training Accuracy": 0.8056,
+          "Validation Accuracy": 0.7736
+        },
+        {
+          "Training Accuracy": 0.8059,
+          "Validation Accuracy": 0.7767
         }
       ],
       "stats": {
-        "avg_train": 0.81,
-        "avg_val": 0.7625,
-        "val_std": 0.0189,
-        "gap": 0.0475
+        "avg_train": 0.8073,
+        "avg_val": 0.7584,
+        "val_std": 0.0241,
+        "gap": 0.0489
       }
     }
   },
@@ -545,107 +705,289 @@
     }
   ],
   "words_pos": {
-    "pemilu": 76,
-    "pakai": 42,
-    "biar": 38,
-    "sistem": 32,
-    "menang": 31,
-    "kardus": 26,
-    "e": 25,
-    "langsung": 23,
-    "suara": 21,
-    "pilih": 21,
-    "digital": 21,
-    "rakyat": 20,
-    "gembok": 18,
-    "voting": 17,
-    "online": 16,
-    "irit": 16,
-    "hemat": 15,
-    "data": 14,
-    "elektronik": 13,
-    "hasil": 12,
-    "indonesia": 12,
-    "mudah": 11,
-    "biaya": 11,
-    "negara": 10,
-    "ktp": 10,
-    "nan": 9,
-    "ubah": 9,
-    "bikin": 8,
-    "akun": 8,
-    "kadang": 7,
-    "konoha": 7,
-    "kpu": 7,
-    "nik": 7,
-    "tebak": 7,
-    "main": 7,
-    "perintah": 6,
-    "uang": 6,
-    "gaji": 6,
-    "anggar": 6,
-    "bbm": 6,
-    "banteng": 6,
-    "tinggal": 6,
-    "model": 6,
-    "hati": 5,
-    "ente": 5,
-    "pikir": 5,
-    "aplikasi": 5,
-    "mahal": 5,
-    "percaya": 5,
-    "hitung": 5
+    "akun": 8.0,
+    "aman": 4.0,
+    "amerika": 3.0,
+    "anggar": 6.0,
+    "anti": 3.0,
+    "apa": 3.0,
+    "aplikasi": 5.0,
+    "atur": 4.0,
+    "baik": 3.0,
+    "banteng": 6.0,
+    "bbm": 6.0,
+    "beli": 3.0,
+    "bensin": 3.0,
+    "biar": 38.0,
+    "biar hemat": 3.0,
+    "biar irit": 10.0,
+    "biar menang": 6.0,
+    "biar mudah": 5.0,
+    "biaya": 11.0,
+    "bikin": 8.0,
+    "bikin pemilu": 3.0,
+    "bilang": 3.0,
+    "bocor": 3.0,
+    "buang": 4.0,
+    "cepat": 3.0,
+    "cerdas": 3.0,
+    "curang": 5.0,
+    "daftar": 3.0,
+    "data": 14.0,
+    "data rakyat": 3.0,
+    "digital": 21.0,
+    "digital hemat": 4.0,
+    "dpr": 3.0,
+    "duga": 5.0,
+    "duit": 3.0,
+    "elektronik": 13.0,
+    "ente": 5.0,
+    "ente kadang": 3.0,
+    "gaji": 6.0,
+    "ganti": 4.0,
+    "gembok": 18.0,
+    "google": 3.0,
+    "habis": 3.0,
+    "hasil": 12.0,
+    "hati": 5.0,
+    "hemat": 15.0,
+    "hitung": 5.0,
+    "ide": 4.0,
+    "indonesia": 12.0,
+    "irit": 16.0,
+    "jalan": 3.0,
+    "jamin": 3.0,
+    "juta": 3.0,
+    "kadang": 7.0,
+    "kadang kadang": 3.0,
+    "kampanye": 3.0,
+    "kardus": 26.0,
+    "kardus gembok": 14.0,
+    "kemarin": 4.0,
+    "kertas": 5.0,
+    "khusus": 3.0,
+    "konoha": 7.0,
+    "kotak": 5.0,
+    "kpu": 7.0,
+    "ktp": 10.0,
+    "kuasa": 3.0,
+    "laksana": 4.0,
+    "laku": 3.0,
+    "langsung": 23.0,
+    "lihat": 3.0,
+    "mahal": 5.0,
+    "main": 7.0,
+    "maju": 3.0,
+    "mana": 3.0,
+    "manipulasi": 3.0,
+    "masuk": 4.0,
+    "menang": 31.0,
+    "mesin": 4.0,
+    "milik": 4.0,
+    "milu": 3.0,
+    "model": 6.0,
+    "mudah": 11.0,
+    "negara": 10.0,
+    "nik": 7.0,
+    "no": 4.0,
+    "online": 16.0,
+    "orang": 5.0,
+    "paham": 5.0,
+    "pakai": 42.0,
+    "pakai digital": 3.0,
+    "pakai google": 3.0,
+    "pakai kardus": 5.0,
+    "pakai sistem": 5.0,
+    "partai": 5.0,
+    "pemilu": 76.0,
+    "pemilu digital": 6.0,
+    "pemilu elektronik": 4.0,
+    "pemilu langsung": 6.0,
+    "pemilu online": 4.0,
+    "pemilu sistem": 3.0,
+    "percaya": 5.0,
+    "perintah": 6.0,
+    "pikir": 5.0,
+    "pilih": 21.0,
+    "pilkada": 5.0,
+    "politik": 3.0,
+    "presiden": 3.0,
+    "rakyat": 20.0,
+    "ribu": 3.0,
+    "selenggara": 3.0,
+    "server": 3.0,
+    "sistem": 32.0,
+    "sistem pemilu": 3.0,
+    "suara": 21.0,
+    "susah": 3.0,
+    "tebak": 7.0,
+    "teknologi": 3.0,
+    "tentu": 4.0,
+    "terap": 3.0,
+    "tindak": 3.0,
+    "tinggal": 6.0,
+    "tps": 4.0,
+    "tugas": 4.0,
+    "tuju": 5.0,
+    "uang": 6.0,
+    "ubah": 9.0,
+    "usul": 4.0,
+    "via": 4.0,
+    "vote": 5.0,
+    "voting": 17.0,
+    "voting sistem": 3.0
   },
   "words_neg": {
-    "data": 109,
-    "digital": 43,
-    "bocor": 42,
-    "menang": 37,
-    "pemilu": 36,
-    "manipulasi": 35,
-    "biar": 27,
-    "pilih": 24,
-    "mudah": 20,
-    "tau": 20,
-    "curang": 19,
-    "presiden": 19,
-    "hasil": 17,
-    "irit": 16,
-    "gampang": 16,
-    "pakai": 15,
-    "orang": 13,
-    "indonesia": 13,
-    "online": 12,
-    "hacker": 12,
-    "nan": 12,
-    "suara": 12,
-    "akun": 11,
-    "e": 10,
-    "langsung": 10,
-    "kemarin": 10,
-    "tuju": 9,
-    "main": 9,
-    "voting": 9,
-    "takut": 9,
-    "ubah": 8,
-    "akal": 8,
-    "via": 8,
-    "tinggal": 8,
-    "sistem": 8,
-    "percaya": 7,
-    "lo": 7,
-    "nik": 7,
-    "atur": 7,
-    "manual": 7,
-    "ah": 7,
-    "enak": 6,
-    "hilang": 6,
-    "ktp": 6,
-    "negara": 6,
-    "usul": 6,
-    "tahu": 6,
-    "aman": 6,
-    "banget": 6,
-    "pertamina": 5
+    "ah": 7.0,
+    "akal": 8.0,
+    "akalin": 3.0,
+    "akun": 11.0,
+    "akun bot": 4.0,
+    "allah": 3.0,
+    "aman": 6.0,
+    "amerika": 3.0,
+    "angka": 5.0,
+    "anjir": 4.0,
+    "aplikasi": 4.0,
+    "arah": 3.0,
+    "atur": 7.0,
+    "bahaya": 5.0,
+    "banget": 6.0,
+    "beli": 3.0,
+    "berita": 3.0,
+    "biar": 27.0,
+    "biar gampang": 6.0,
+    "biar irit": 5.0,
+    "biar manipulasi": 3.0,
+    "big": 4.0,
+    "big data": 4.0,
+    "bingung": 3.0,
+    "bjorka": 5.0,
+    "bocor": 42.0,
+    "bocor data": 7.0,
+    "bot": 4.0,
+    "buka": 3.0,
+    "buzzer": 3.0,
+    "calon": 3.0,
+    "card": 4.0,
+    "cari": 5.0,
+    "coblos": 3.0,
+    "curang": 19.0,
+    "curiga": 3.0,
+    "dana": 3.0,
+    "data": 109.0,
+    "data bocor": 22.0,
+    "data kominfo": 4.0,
+    "data ktp": 3.0,
+    "data manipulasi": 5.0,
+    "data mudah": 3.0,
+    "data my": 3.0,
+    "data nik": 4.0,
+    "data warga": 3.0,
+    "digital": 43.0,
+    "digital mudah": 3.0,
+    "drama": 3.0,
+    "duduk": 3.0,
+    "edit": 3.0,
+    "enak": 6.0,
+    "error": 3.0,
+    "erti": 3.0,
+    "gampang": 16.0,
+    "gampang curang": 3.0,
+    "gampang manipulasi": 5.0,
+    "gembok": 4.0,
+    "hack": 3.0,
+    "hacker": 12.0,
+    "hahaha": 3.0,
+    "hapus": 3.0,
+    "hasil": 17.0,
+    "hemat": 5.0,
+    "hilang": 6.0,
+    "hp": 3.0,
+    "indonesia": 13.0,
+    "internet": 4.0,
+    "irit": 16.0,
+    "iya": 5.0,
+    "jaga": 4.0,
+    "jual": 3.0,
+    "jujur": 3.0,
+    "juta": 5.0,
+    "kah": 3.0,
+    "kali": 3.0,
+    "kardus": 3.0,
+    "kemarin": 10.0,
+    "kominfo": 5.0,
+    "ktp": 6.0,
+    "ku": 4.0,
+    "kuasa": 4.0,
+    "langsung": 10.0,
+    "lawak": 3.0,
+    "lindung": 3.0,
+    "lo": 7.0,
+    "lucu": 3.0,
+    "main": 9.0,
+    "mainin": 3.0,
+    "maju": 3.0,
+    "mana": 3.0,
+    "manipulasi": 35.0,
+    "manipulasi data": 14.0,
+    "manual": 7.0,
+    "menang": 37.0,
+    "merah": 4.0,
+    "milik": 4.0,
+    "misi": 5.0,
+    "mudah": 20.0,
+    "mudah manipulasi": 7.0,
+    "muncul": 5.0,
+    "my": 4.0,
+    "my pertamina": 3.0,
+    "negara": 6.0,
+    "negeri": 3.0,
+    "nik": 7.0,
+    "offline": 4.0,
+    "online": 12.0,
+    "ooo": 3.0,
+    "orang": 13.0,
+    "orang akun": 3.0,
+    "paham": 4.0,
+    "pakai": 15.0,
+    "pdi": 4.0,
+    "pegang": 3.0,
+    "pemilu": 36.0,
+    "pemilu digital": 3.0,
+    "pemilu online": 3.0,
+    "pengin": 4.0,
+    "percaya": 7.0,
+    "perintah": 3.0,
+    "pertamina": 5.0,
+    "pikir": 3.0,
+    "pilih": 24.0,
+    "presiden": 19.0,
+    "rakyat": 4.0,
+    "rawan": 3.0,
+    "rencana": 3.0,
+    "server": 3.0,
+    "sim": 5.0,
+    "sim card": 4.0,
+    "sistem": 8.0,
+    "suara": 12.0,
+    "suka": 4.0,
+    "tahu": 6.0,
+    "takut": 9.0,
+    "tau": 20.0,
+    "tebak": 4.0,
+    "tinggal": 8.0,
+    "transparan": 5.0,
+    "tua": 3.0,
+    "tuju": 9.0,
+    "ubah": 8.0,
+    "usul": 6.0,
+    "valid": 3.0,
+    "via": 8.0,
+    "via digital": 7.0,
+    "voting": 9.0,
+    "warga": 4.0,
+    "wkwkwkwk": 4.0,
+    "ygy": 4.0
   }
 }

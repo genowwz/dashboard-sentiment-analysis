@@ -1041,12 +1041,12 @@ def show_single_comment_result(result: dict):
         st.markdown("<div style='font-size:1.05rem;margin-bottom:2px;'>Prediksi Sentimen</div>", unsafe_allow_html=True)
         st.markdown(f"<div style='font-size:1.4rem;font-weight:700;margin-top:0px'>{label}</div>", unsafe_allow_html=True)
 
-        # combined bar: green (positive) then red (negative)
+        # combined bar: use a single gradient-filled element to avoid gaps
+        pos_pct_val = pos_pct * 100.0
         bar_html = (
             "<div style='margin-top:12px'>"
             "<div class='prob-bar-bg' role='progressbar' aria-valuemin='0' aria-valuemax='100'>"
-            f"<div class='prob-bar-fill' style='width:{pos_pct*100:.2f}%;display:inline-block;'></div>"
-            f"<div style='width:{neg_pct*100:.2f}%;height:100%;display:inline-block;background:linear-gradient(90deg,#f97373,#ef4444);'></div>"
+            f"<div style='width:100%;height:100%;background:linear-gradient(90deg, #34d399 0%, #10b981 {pos_pct_val:.2f}%, #f97373 {pos_pct_val:.2f}%, #ef4444 100%);'></div>"
             "</div>"
             f"<div style='margin-top:8px' class='prob-label'>Positif: <strong>{prob_pos:.2%}</strong> &nbsp; Negatif: <strong>{prob_neg:.2%}</strong></div>"
             "</div>"
